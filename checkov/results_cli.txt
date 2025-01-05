@@ -1,0 +1,62 @@
+[34mterraform scan results:
+[36m
+Passed checks: 27, Failed checks: 3, Skipped checks: 0
+
+[97mCheck: CKV_AWS_150: "Ensure that Load Balancer has deletion protection enabled"
+[31m	FAILED for resource: aws_lb.app
+[35m	File: /main.tf:79-90
+	Guide: [1m[4m[34mhttps://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-150
+
+		[37m79 | [33mresource "aws_lb" "app" {
+		[37m80 | [33m  name                       = "${var.project_name}-alb"
+		[37m81 | [33m  internal                   = true
+		[37m82 | [33m  load_balancer_type         = "application"
+		[37m83 | [33m  security_groups            = [aws_security_group.alb.id]
+		[37m84 | [33m  subnets                    = var.private_subnet_ids
+		[37m85 | [33m  drop_invalid_header_fields = true
+		[37m86 | [33m
+		[37m87 | [33m  tags = {
+		[37m88 | [33m    Name = "${var.project_name}-alb"
+		[37m89 | [33m  }
+		[37m90 | [33m}
+
+[97mCheck: CKV_AWS_91: "Ensure the ELBv2 (Application/Network) has access logging enabled"
+[31m	FAILED for resource: aws_lb.app
+[35m	File: /main.tf:79-90
+	Guide: [1m[4m[34mhttps://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-logging-22
+
+		[37m79 | [33mresource "aws_lb" "app" {
+		[37m80 | [33m  name                       = "${var.project_name}-alb"
+		[37m81 | [33m  internal                   = true
+		[37m82 | [33m  load_balancer_type         = "application"
+		[37m83 | [33m  security_groups            = [aws_security_group.alb.id]
+		[37m84 | [33m  subnets                    = var.private_subnet_ids
+		[37m85 | [33m  drop_invalid_header_fields = true
+		[37m86 | [33m
+		[37m87 | [33m  tags = {
+		[37m88 | [33m    Name = "${var.project_name}-alb"
+		[37m89 | [33m  }
+		[37m90 | [33m}
+
+[97mCheck: CKV_AWS_378: "Ensure AWS Load Balancer doesn't use HTTP protocol"
+[31m	FAILED for resource: aws_lb_target_group.app
+[35m	File: /main.tf:105-121
+
+		[37m105 | [33mresource "aws_lb_target_group" "app" {
+		[37m106 | [33m  name     = "${var.project_name}-tg"
+		[37m107 | [33m  port     = 80
+		[37m108 | [33m  protocol = "HTTP"
+		[37m109 | [33m  vpc_id   = var.vpc_id
+		[37m110 | [33m
+		[37m111 | [33m  health_check {
+		[37m112 | [33m    enabled             = true
+		[37m113 | [33m    healthy_threshold   = 2
+		[37m114 | [33m    interval            = 30
+		[37m115 | [33m    timeout             = 5
+		[37m116 | [33m    path                = "/"
+		[37m117 | [33m    port                = "traffic-port"
+		[37m118 | [33m    protocol            = "HTTP"
+		[37m119 | [33m    unhealthy_threshold = 2
+		[37m120 | [33m  }
+		[37m121 | [33m}
+
