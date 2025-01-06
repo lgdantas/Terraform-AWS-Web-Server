@@ -6,7 +6,7 @@ private_subnet_ids = [                   # Replace with your subnet IDs
   "subnet-xxxxxxxxxxxxxxxxx",
   "subnet-xxxxxxxxxxxxxxxxx"
 ]
-key_pair_name        = "your-key-pair"           # Replace with your key pair name
+key_pair_name        = ""                      # Add your key pair name (optional)
 ami_id               = "ami-xxxxxxxxxxxxxxxxx" # Replace with Amazon Linux 2023 AMI ID
 instance_type        = "t3.micro"
 asg_desired_capacity = 2
