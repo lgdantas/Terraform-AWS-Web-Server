@@ -54,7 +54,8 @@ terraform apply
 
 
 ## Testing
-
+```bash
 sudo cp ca.crt /etc/pki/ca-trust/source/anchors/
 sudo update-ca-trust extract
 curl https://<project_name>.<private_domain>
+```
